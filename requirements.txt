@@ -1,0 +1,11 @@
+# Django
+Django==3.1
+
+# Django restframework
+djangorestframework>=3.9.0,<3.10.0
+
+# psycopg2
+psycopg2>=2.7.5,<2.8.0
+
+# flake8
+flake8>=3.6.0,<3.7.0
