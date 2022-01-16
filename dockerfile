@@ -1,4 +1,4 @@
-# python:3.9イメージを指定
+# python:3.7-alpineイメージを指定
 FROM python:3.7-alpine
 
 # プロジェクトの管理者を記載
