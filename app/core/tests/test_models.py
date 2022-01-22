@@ -2,8 +2,11 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 
 
-def sample_user(email='test@londonappdev.com', password='testpass'):
-    """Create a sample user"""
+from core import models
+
+
+def sample_user(email='mymailaddress@hoge.huga', password='lovepython'):
+    """Helper function to create a sample user"""
     return get_user_model().objects.create_user(email, password)
 
 
@@ -42,3 +45,12 @@ class ModelTests(TestCase):
 
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_fish_str(self):
+        """Test the fish string representation"""
+        fish = models.Fish.objects.create(
+            user=sample_user(),
+            name='コリドラス'
+        )
+
+        self.assertEqual(str(fish), fish.name)
