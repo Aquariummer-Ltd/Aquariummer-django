@@ -1,5 +1,5 @@
 # python:3.7-alpineイメージを指定
-FROM python:3.7-alpine
+FROM python:3.10-alpine
 
 # プロジェクトの管理者を記載
 LABEL maintainer = "Aquariummer.Ltd <keita.ide78dev@gmail.com>"
@@ -11,11 +11,10 @@ ENV PYTHONUNBUFFERED 1
 COPY ./requirements.txt /requirements.txt
 
 # pipコマンドを最新にし、txtファイル内のパッケージをインストール
-RUN apk add --update --no-cache postgresql-client
-RUN apk add --update --no-cache --virtual .tmp-build-deps \
-        gcc libc-dev linux-headers postgresql-dev
 RUN pip install --upgrade pip && pip install -r /requirements.txt
-RUN apk del .tmp-build-deps
+RUN apk --no-cache add build-base
+RUN apk --no-cache add postgresql-dev
+RUN python3 -m pip install psycopg2
 
 # ローカルのapp配下のファイルをイメージ側のapp配下にコピー
 RUN mkdir /app
